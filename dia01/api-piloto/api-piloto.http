@@ -1,0 +1,6 @@
+@api_piloto_HostAddress = http://localhost:5056
+
+GET {{api_piloto_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
