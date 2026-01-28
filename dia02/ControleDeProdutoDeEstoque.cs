@@ -44,7 +44,7 @@ namespace dia02
 
                     Console.Write("Digite o preço do produto: ");
                     double precoInput = double.Parse(Console.ReadLine());
-
+                                                                                        // Inicio das validações
                     if (string.IsNullOrWhiteSpace(nomeInput) || precoInput <= 0)
                     {
                         Console.WriteLine("Erro: Nome vazio ou preço inválido.");
@@ -63,11 +63,11 @@ namespace dia02
                 Console.Write("Deseja cadastrar outro? (s/n): ");
                 continuar = Console.ReadLine();
             }
-
+                                                                                    // Finalização das validações
             Console.WriteLine("\n--- RELATÓRIO DE ESTOQUE ---");
             foreach (var prod in listaProdutos)
             {
-                // Aqui usamos o 'get' das propriedades Nome e Preco
+                
                 Console.WriteLine($"Produto: {prod.Nome} - Preço: R$ {prod.Preco:F2}");
             }
             
