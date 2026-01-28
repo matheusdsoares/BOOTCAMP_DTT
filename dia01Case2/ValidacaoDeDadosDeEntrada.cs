@@ -9,9 +9,21 @@ namespace dia01Case2
     {
         public static void Main()
         {
+            bool rodando = true;
+
+            while (rodando)
+          {
+            Console.WriteLine("-- Digite Sair para finalizar o programa --");
             Console.WriteLine("--- Cadastro de Usuário ---");
             Console.Write("Digite o seu nome: ");
             string nome = Console.ReadLine();
+            // Inicio da Validação de dados
+            if (nome.ToLower() == "sair")
+            {
+                rodando = false;
+                Console.WriteLine("Programa encerrado. Até logo!");
+                continue; 
+            }
 
             Console.Write("Digite a sua idade: ");
             string entradaIdade = Console.ReadLine();
@@ -21,7 +33,7 @@ namespace dia01Case2
             Console.WriteLine("\n--- Validando Dados ---");
 
             Console.WriteLine("--- Iniciando Validação ---");
-            // Inicio da Validação de dados
+            
             if (string.IsNullOrWhiteSpace(nome))
             {
                 Console.WriteLine("Erro: O nome não pode ser vazio.");
@@ -36,7 +48,7 @@ namespace dia01Case2
             {
                 Console.WriteLine("Sucesso: Usuário validado com sucesso");
             }
-            // Termino da Validação de dados
+          }  // Termino da Validação de dados
         }
     }
 }
