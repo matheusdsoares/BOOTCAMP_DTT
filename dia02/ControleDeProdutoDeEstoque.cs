@@ -26,7 +26,7 @@ using Dia02Produto;
 
 namespace dia02
 {
-    
+
 
     public class ControleDeProdutoDeEstoque
     {
@@ -34,7 +34,7 @@ namespace dia02
         {
             List<Produto> listaProdutos = new List<Produto>();
             string continuar;
-            
+
 
             // --- FASE 1: CADASTRO ---
             do
@@ -74,7 +74,7 @@ namespace dia02
                     if (string.IsNullOrWhiteSpace(busca)) break;
 
                     int removidos = listaProdutos.RemoveAll(p => p.Nome.Equals(busca, StringComparison.OrdinalIgnoreCase));
-                    
+
                     if (removidos > 0) Console.WriteLine("Removido com sucesso.");
                     else Console.WriteLine("Produto não encontrado.");
 
@@ -100,17 +100,38 @@ namespace dia02
                     {
                         try
                         {
+                            // Validação do Novo Preço
                             Console.Write($"Novo preço para {p.Nome} (Atual: {p.Preco:F2}): ");
-                            p.Preco = double.Parse(Console.ReadLine());
+                            double novoPreco = double.Parse(Console.ReadLine());
+
+                            if (novoPreco > 0)
+                            {
+                                p.Preco = novoPreco;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Erro: O preço deve ser maior que 0. Alteração de preço ignorada.");
+                            }
+
+                            // Validação da Nova Quantidade
                             Console.Write($"Nova quantidade (Atual: {p.Quantidade}): ");
                             int novaQtd = int.Parse(Console.ReadLine());
-                            
-                            if (novaQtd > 0) p.Quantidade = novaQtd;
-                            else Console.WriteLine("Quantidade precisa ser maior que 0.");
-                            
-                            Console.WriteLine("Dados atualizados!");
+
+                            if (novaQtd > 0) // Permitindo 0 (estoque zerado), mas não negativo
+                            {
+                                p.Quantidade = novaQtd;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Erro: A quantidade não pode ser negativa. Alteração de quantidade ignorada.");
+                            }
+
+                            Console.WriteLine("\nProcesso de atualização finalizado!");
                         }
-                        catch { Console.WriteLine("Erro nos dados. Edição cancelada."); }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Erro: Entrada inválida. Use apenas números e vírgula.");
+                        }
                     }
                     else Console.WriteLine("Produto não encontrado.");
 
