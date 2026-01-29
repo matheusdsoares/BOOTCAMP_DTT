@@ -89,7 +89,7 @@ namespace ControleVisitantesCoworking
         static void Listar()
         {
             Console.WriteLine("\n--- Lista de Visitantes (Ordenada por ID) ---");
-            // Desafio Extra: Ordenar por ID usando LINQ
+            
             var listaOrdenada = listaVisitantes.OrderBy(v => v.Id).ToList();
 
             if (listaOrdenada.Count == 0) Console.WriteLine("Nenhum visitante registrado.");
