@@ -22,22 +22,11 @@ using System.Collections.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dia02Produto;
 
 namespace dia02
 {
-    public class Produto
-    {
-        public string Nome { get; set; }
-        public double Preco { get; set; }
-        public int Quantidade { get; set; }
-
-        public Produto(string nome, double preco, int quantidade)
-        {
-            Nome = nome;
-            Preco = preco;
-            Quantidade = quantidade;
-        }
-    }
+    
 
     public class ControleDeProdutoDeEstoque
     {
@@ -45,6 +34,7 @@ namespace dia02
         {
             List<Produto> listaProdutos = new List<Produto>();
             string continuar;
+            
 
             // --- FASE 1: CADASTRO ---
             do
