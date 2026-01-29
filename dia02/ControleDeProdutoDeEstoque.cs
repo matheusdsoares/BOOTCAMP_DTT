@@ -19,6 +19,10 @@ using System.Collections.Generic;
 using System;
 using System.Collections.Generic;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace dia02
 {
     public class Produto
@@ -40,114 +44,105 @@ namespace dia02
         public static void Main()
         {
             List<Produto> listaProdutos = new List<Produto>();
-            string continuar = "s";
+            string continuar;
 
-            while (continuar.ToLower() == "s")
+            // --- FASE 1: CADASTRO ---
+            do
             {
                 try
                 {
-                    Console.Write("\nDigite o nome do produto: ");
-                    string nomeInput = Console.ReadLine();
+                    Console.Write("\nNome do produto: ");
+                    string nome = Console.ReadLine();
+                    Console.Write("Preço: ");
+                    double preco = double.Parse(Console.ReadLine());
+                    Console.Write("Quantidade: ");
+                    int qtd = int.Parse(Console.ReadLine());
 
-                    Console.Write("Digite o preço do produto: ");
-                    double precoInput = double.Parse(Console.ReadLine());
-
-                    Console.Write("Digite a quantidade inicial: ");
-                    int qtdInput = int.Parse(Console.ReadLine());
-
-                    // Validação de entrada
-                    if (string.IsNullOrWhiteSpace(nomeInput) || precoInput <= 0 || qtdInput <= 0)
-                    {
-                        Console.WriteLine("Erro: Verifique os dados, nome não pode ser nulo, nem conter espaços. (Preço > 0 e Quantidade > 0).");
-                    }
+                    if (string.IsNullOrWhiteSpace(nome) || preco <= 0 || qtd <= 0)
+                        Console.WriteLine("Erro: Dados inválidos (Preço > 0 e Qtd > 0).");
                     else
                     {
-                        listaProdutos.Add(new Produto(nomeInput, precoInput, qtdInput));
-                        Console.WriteLine("Produto cadastrado com sucesso!");
+                        listaProdutos.Add(new Produto(nome, preco, qtd));
+                        Console.WriteLine("Produto cadastrado!");
                     }
                 }
-                catch (FormatException)
-                {
-                    Console.WriteLine("Erro: Use apenas números nos campos de preço e quantidade.");
-                }
+                catch { Console.WriteLine("Erro: Entrada inválida."); }
 
-                Console.Write("Deseja cadastrar outro? (s/n): ");
-                continuar = Console.ReadLine();
-            }
+                Console.Write("Cadastrar outro produto? (s/n): ");
+                continuar = Console.ReadLine().ToLower();
+            } while (continuar == "s");
 
-            ExibirRelatorio(listaProdutos, "RELATÓRIO DE ESTOQUE");
+            ExibirRelatorio(listaProdutos, "ESTOQUE ATUAL");
 
-            // --- REMOÇÃO ---
+            // --- FASE 2: EXCLUSÃO REPETITIVA ---
             if (listaProdutos.Count > 0)
             {
-                Console.Write("\nDigite o nome do produto que deseja REMOVER (ou Enter para pular): ");
-                string nomeParaRemover = Console.ReadLine();
-                int removidos = listaProdutos.RemoveAll(p => p.Nome.Equals(nomeParaRemover, StringComparison.OrdinalIgnoreCase));
-                if (removidos > 0) Console.WriteLine("Produto removido com sucesso!");
+                do
+                {
+                    Console.Write("\nNome do produto para REMOVER (ou Enter para pular): ");
+                    string busca = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(busca)) break;
+
+                    int removidos = listaProdutos.RemoveAll(p => p.Nome.Equals(busca, StringComparison.OrdinalIgnoreCase));
+                    
+                    if (removidos > 0) Console.WriteLine("Removido com sucesso.");
+                    else Console.WriteLine("Produto não encontrado.");
+
+                    if (listaProdutos.Count == 0) break;
+
+                    Console.Write("Deseja remover outro? (s/n): ");
+                    continuar = Console.ReadLine().ToLower();
+                } while (continuar == "s");
             }
 
-            // --- ATUALIZAÇÃO (PREÇO E QUANTIDADE) ---
+            // --- FASE 3: EDIÇÃO REPETITIVA ---
             if (listaProdutos.Count > 0)
             {
-                Console.Write("\nDigite o nome do produto para EDITAR: ");
-                string nomeParaEditar = Console.ReadLine();
-                Produto prodEncontrado = listaProdutos.Find(p => p.Nome.Equals(nomeParaEditar, StringComparison.OrdinalIgnoreCase));
-
-                if (prodEncontrado != null)
+                do
                 {
-                    try
-                    {
-                        Console.WriteLine($"\nEditando: {prodEncontrado.Nome}");
-                        Console.Write("Novo preço (ou digite o atual): ");
-                        prodEncontrado.Preco = double.Parse(Console.ReadLine());
+                    Console.Write("\nNome do produto para EDITAR (ou Enter para pular): ");
+                    string busca = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(busca)) break;
 
-                        Console.Write("Nova quantidade (não pode ser menor ou igual a 0): ");
-                        int novaQtd = int.Parse(Console.ReadLine());
+                    Produto p = listaProdutos.Find(x => x.Nome.Equals(busca, StringComparison.OrdinalIgnoreCase));
 
-                        if (novaQtd <= 0)
-                        {
-                            Console.WriteLine("Erro: Quantidade inválida. A alteração de quantidade foi ignorada.");
-                        }
-                        else
-                        {
-                            prodEncontrado.Quantidade = novaQtd;
-                            Console.WriteLine("Dados atualizados com sucesso!");
-                        }
-                    }
-                    catch (FormatException)
+                    if (p != null)
                     {
-                        Console.WriteLine("Erro: Entrada inválida. Operação cancelada.");
+                        try
+                        {
+                            Console.Write($"Novo preço para {p.Nome} (Atual: {p.Preco:F2}): ");
+                            p.Preco = double.Parse(Console.ReadLine());
+                            Console.Write($"Nova quantidade (Atual: {p.Quantidade}): ");
+                            int novaQtd = int.Parse(Console.ReadLine());
+                            
+                            if (novaQtd > 0) p.Quantidade = novaQtd;
+                            else Console.WriteLine("Quantidade precisa ser maior que 0.");
+                            
+                            Console.WriteLine("Dados atualizados!");
+                        }
+                        catch { Console.WriteLine("Erro nos dados. Edição cancelada."); }
                     }
-                }
-                else if (!string.IsNullOrWhiteSpace(nomeParaEditar))
-                {
-                    Console.WriteLine("Produto não encontrado.");
-                }
+                    else Console.WriteLine("Produto não encontrado.");
+
+                    Console.Write("Deseja editar outro? (s/n): ");
+                    continuar = Console.ReadLine().ToLower();
+                } while (continuar == "s");
             }
 
-            // --- EXIBIÇÃO FINAL ---
-            ExibirRelatorio(listaProdutos, "RELATÓRIO FINAL DE ESTOQUE");
-
-            Console.WriteLine("\nPrograma finalizado. Pressione qualquer tecla para sair...");
+            // --- FASE FINAL ---
+            ExibirRelatorio(listaProdutos, "RELATÓRIO FINAL");
+            Console.WriteLine("\nFim do programa. Pressione qualquer tecla...");
             Console.ReadKey();
         }
 
         public static void ExibirRelatorio(List<Produto> lista, string titulo)
         {
             Console.WriteLine($"\n--- {titulo} ---");
-            if (lista.Count == 0)
-            {
-                Console.WriteLine("O estoque está vazio.");
-            }
+            if (lista.Count == 0) Console.WriteLine("Estoque vazio.");
             else
             {
-                
                 Console.WriteLine($"{"Nome",-15} | {"Preço",-10} | {"Qtd",-5}");
-                Console.WriteLine(new string('-', 35));
-                foreach (var prod in lista)
-                {
-                    Console.WriteLine($"{prod.Nome,-15} | R$ {prod.Preco,-7:F2} | {prod.Quantidade,-5}");
-                }
+                lista.ForEach(p => Console.WriteLine($"{p.Nome,-15} | R$ {p.Preco,-7:F2} | {p.Quantidade,-5}"));
             }
         }
     }
