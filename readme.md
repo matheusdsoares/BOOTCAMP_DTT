@@ -1,5 +1,7 @@
 # Bem-vindo ao repositório do dia 02, case 2.1.
 
+## Linguagem utilizada: C#
+
 ## Conteúdo da class Visitante.
 Foi criado uma pasta com o nome "Models" para reservar a classe criada "Visistantes.cs" onde dentro dessa classe, foram criados atributos como "nome, id, horario de chegada, saida" e um método onde ele vai ajustar a data e hora que for cadastrada para HH:mm e após isso retornar uma tabela com as informações do cliente cadastrado.
 
