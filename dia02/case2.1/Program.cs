@@ -8,7 +8,7 @@ namespace ControleVisitantesCoworking
 
     class Program
     {
-        // Uso de Collection (List) para armazenar os visitantes
+        
         static List<Visitante> listaVisitantes = new List<Visitante>();
         static int proximoId = 1;
 
@@ -128,7 +128,7 @@ namespace ControleVisitantesCoworking
         static void FiltrarPrimeiraVez()
         {
             Console.WriteLine("\n--- Visitantes em sua Primeira Vez ---");
-            // Desafio Extra: Filtrar apenas primeira visita
+            
             var apenasPrimeira = listaVisitantes.Where(v => v.IsPrimeiraVez).ToList();
 
             if (apenasPrimeira.Count == 0) Console.WriteLine("Nenhum visitante na primeira vez.");
