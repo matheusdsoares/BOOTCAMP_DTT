@@ -1,10 +1,15 @@
 ﻿using System.ComponentModel;
+<<<<<<< HEAD
 using Banco;
 
+=======
+using ContaBancaria;
+>>>>>>> 93bdaf6135faefba573303f1b9d1a75035802690
 class Program
 {
     static void Main()
     {
+<<<<<<< HEAD
         var contaUsuario = new ContaCorrente("0500-x", 500, false, 0 );
         Console.WriteLine("Conta do Usuario");
         Console.WriteLine(contaUsuario);
@@ -65,3 +70,16 @@ class Program
         // Console.WriteLine("--- Fim dos Testes ---");
     }
 }
+=======
+        ContaCorrente minhaConta = new ContaCorrente(1, 50, false, 0);
+
+        minhaConta.ConsultarSaldo();
+        minhaConta.Saque(50.00);
+        minhaConta.Saque(100.00);
+        minhaConta.ConsultarSaldo();
+        minhaConta.VerificarUsoChequeEspecial();
+        minhaConta.Depositar(200.00);
+        minhaConta.ConsultarSaldo();
+    }
+}
+>>>>>>> 93bdaf6135faefba573303f1b9d1a75035802690

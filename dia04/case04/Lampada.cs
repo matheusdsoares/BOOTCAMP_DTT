@@ -3,32 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ItemDaCasa
+namespace UsodaLampada
 {
     public class Lampada
     {
-        private bool isLigada;
+        private bool ligada;
 
         public Lampada()
+            {
+                ligada = false;
+            }
+
+        public void ligar()
         {
-            isLigada = false;
+            ligada = true;
+            Console.WriteLine("Lâmpada ligada");
         }
 
-        public void Ligar()
+        public void desligar()
         {
-            isLigada = true;
-            Console.WriteLine("Lampada ligada");
+            ligada = false;
+            Console.WriteLine("Lâmpada desligada");
         }
 
-        public void Desligar()
+        public bool estaLigada()
         {
-            isLigada = false;
-            Console.WriteLine("Lampada desligada");
-        }
-
-        public bool VerificarLampada()
-        {
-            return isLigada;
-        }
-    }
+            return this.ligada;
+        }        
+    }    
 }

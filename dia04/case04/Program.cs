@@ -1,12 +1,11 @@
-﻿using ItemDaCasa;
+using UsodaLampada;
 
 class Program
 {
-    public static void Main()
+    static void Main()
     {
         Lampada lampada = new Lampada();
-        lampada.Ligar();
-        lampada.Desligar();
-
+        lampada.ligar();
+        lampada.desligar();
     }
 }
