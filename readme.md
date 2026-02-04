@@ -1,23 +1,63 @@
-# Bem-vindo ao repositório do dia 02, case 2.1.
+# Bootcamp DTT - Jornada C# & .NET
 
-## Linguagem utilizada: C#
+Bem-vindo ao repositório do meu aprendizado no **Bootcamp DTT**. Aqui documento toda a minha evolução, desde a lógica básica até a construção de APIs robustas utilizando o ecossistema .NET.
 
-## Conteúdo da class Visitante.
-Foi criado uma pasta com o nome "Models" para reservar a classe criada "Visistantes.cs" onde dentro dessa classe, foram criados atributos como "nome, id, horario de chegada, saida" e um método onde ele vai ajustar a data e hora que for cadastrada para HH:mm e após isso retornar uma tabela com as informações do cliente cadastrado.
+> Status: Em progresso 🚀 (Atualizado conforme as aulas avançam)
 
-## Conteúdo da class Program.
-Foi criado uma lista para guardar os cadastrados e reutilizar no decorrer do código, colocamos um while e switch para criar uma tela de interação com o usúario.
-Criamos métodos para "Cadastrar, Buscar, Registrar saida, Filtrar a primeira vez" 
-utilizando alguns if - else, contextualizando com Try-Catch, organizando percorrendo a lista.
+---
 
-### Comandos Gits/Terminal utilizados.
-- mkdir - Criação das pastas (dia02, case 2.1, models)
-- dotnet new console - Cria o projeto, criando os arquivos necessários para usar outros comandos dotnet.
-- dotnet run - Faz o programa ser inicializado.
-- git branch - Verifica em qual branch está.
-- git add . - Salva todas as alterações que foram feitas.
-- git commit -m - Cria um comentário e prepara para subir o programa remotamente
-- git push - Sobe o programa para o github
-- git pull - Pega as informações remotamente e trás para o computador local
+## 🛠️ Tecnologias e Ferramentas 
+* **Linguagem:** C#
+* **Framework:** .NET (Console & Web API)
+* **Ferramentas:** Git, GitHub e VS Code/Visual Studio
+
+---
+
+## 📅 Diário de Bordo
+Acompanhe o que foi desenvolvido em cada etapa:
+
+| Dia | Foco do Aprendizado | Principais Entregas |
+| :--- | :--- | :--- |
+| **Dia 01** | Organização | Estrutura de pastas e setup do ambiente. |
+| **Dia 02** | POO Básica | Criação da classe `Visitante` e lógica de CRUD. |
+| **Dia 03** | Refatoração | Melhorias na lógica e organização de código. |
+| **Dia 04** | Estruturação | Gestão de pastas para múltiplos casos de uso. |
+| **Dia 05** | APIs | Desenvolvimento da primeira `MinhaApi`. |
+| **Próximos** | *Carregando...* | Espaço reservado para novos módulos. ⏳ |
+
+---
+
+## 💡 Destaques do Projeto
+
+### Conteúdo da classe `Visitante`
+Focada em **Modelagem de Dados**, esta classe gerencia:
+- Atributos como `Nome`, `Id`, e horários.
+- Métodos para formatação de data/hora no padrão `HH:mm`.
+- Geração de tabelas de informações para o cliente.
+
+### Conteúdo da classe `Program`
+O "coração" das aplicações console, onde implementei:
+- Menus interativos com `while` e `switch`.
+- Persistência em listas para busca e filtragem.
+- Tratamento de erros com `try-catch` para uma melhor experiência do usuário.
+
+---
+
+## ⌨️ Comandos Git/Terminal Utilizados
+No dia a dia, utilizei os seguintes comandos para versionamento:
+
+```bash
+# Criar diretórios
+mkdir [nome_da_pasta]
+
+# Comandos .NET
+dotnet new console  # Inicia o projeto
+dotnet run          # Executa a aplicação
+
+# Versionamento Git
+git add .
+git commit -m "Explicação da alteração"
+git push origin [branch]
+git pull origin [branch]
 
 
