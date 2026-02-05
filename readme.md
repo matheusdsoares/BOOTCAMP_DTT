@@ -9,7 +9,7 @@ Bem-vindo ao repositório do meu aprendizado no **Bootcamp DTT**. Aqui documento
 ## 🛠️ Tecnologias e Ferramentas 
 * **Linguagem:** C#
 * **Framework:** .NET (Console & Web API)
-* **Ferramentas:** Git, GitHub e VS Code/Visual Studio
+* **Ferramentas:** Git, GitHub, VS Code/Visual Studio, Dockers, Dbeaver
 
 ---
 
@@ -23,7 +23,7 @@ Acompanhe o que foi desenvolvido em cada etapa:
 | **Dia 03** | Refatoração | Melhorias na lógica e organização de código. |
 | **Dia 04** | Estruturação | Gestão de pastas para múltiplos casos de uso. |
 | **Dia 05** | APIs | Desenvolvimento da primeira `MinhaApi`. |
-| **Próximos** | *Carregando...* | Espaço reservado para novos módulos. ⏳ |
+| **Dia 06** | Dockers e Dbeaver | Desenvolvimento da API, com aplicação no Dorckers e Dbeaver |
 
 ---
 
@@ -53,11 +53,14 @@ mkdir [nome_da_pasta]
 # Comandos .NET
 dotnet new console  # Inicia o projeto
 dotnet run          # Executa a aplicação
+dotnet new webapi -n MinhaApi #Criação da APIWeb
 
 # Versionamento Git
 git add .
 git commit -m "Explicação da alteração"
 git push origin [branch]
 git pull origin [branch]
+git branch
+
 
 
