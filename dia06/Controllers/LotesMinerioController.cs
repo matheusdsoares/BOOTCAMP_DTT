@@ -7,7 +7,7 @@ using MinhaApi.Dtos;
 namespace MinhaApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/LotesMinerio")]
     public class LotesMinerioController : ControllerBase
     {
         private readonly AppDbContext _db;
