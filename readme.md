@@ -25,7 +25,10 @@ Acompanhe o que foi desenvolvido em cada etapa:
 | **Dia 05** | APIs | Desenvolvimento da primeira `MinhaApi`. |
 | **Dia 06** | Dockers e Dbeaver | Desenvolvimento da API, com aplicação no Dorckers e Dbeaver |
 | **Dia 07** | Dockers e Dbeaver | Continuação do projeto do dia 06, por isso não teve nova pasta com o dia 07 |
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2798c70ea5148c100fd819809d9ab9acdf6ed2ee
 
 ---
 
