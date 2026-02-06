@@ -24,6 +24,8 @@ Acompanhe o que foi desenvolvido em cada etapa:
 | **Dia 04** | Estruturação | Gestão de pastas para múltiplos casos de uso. |
 | **Dia 05** | APIs | Desenvolvimento da primeira `MinhaApi`. |
 | **Dia 06** | Dockers e Dbeaver | Desenvolvimento da API, com aplicação no Dorckers e Dbeaver |
+| **Dia 07** | Dockers e Dbeaver | Continuação do projeto do dia 06, por isso não teve nova pasta com o dia 07 |
+
 
 ---
 
