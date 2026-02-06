@@ -1,45 +1,47 @@
+using Microsoft.EntityFrameworkCore;
+using MinhaApi.Data; 
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddEndpointsApiExplorer();
+<<<<<<< HEAD
+
+// Registro do DbContext com Npgsql
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    var cs = builder.Configuration.GetConnectionString("DefaultConnection"); 
+    options
+        .UseNpgsql(cs);
+       // .UseSnakeCaseNamingConvention();
+});
+
+
+// Recomendação do Npgsql para compatibilidade de timestamp (se aplicável)
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+=======
+//builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+>>>>>>> 2798c70ea5148c100fd819809d9ab9acdf6ed2ee
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+<<<<<<< HEAD
+// Mapear controllers
+app.MapControllers();
 
 app.Run();
+=======
+app.MapControllers();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+app.Run();
+>>>>>>> 2798c70ea5148c100fd819809d9ab9acdf6ed2ee
