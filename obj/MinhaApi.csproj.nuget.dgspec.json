@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\aluno\\Desktop\\BOOTCAMP_DTT\\dia06\\MinhaApi\\MinhaApi.csproj": {}
+    "C:\\Users\\aluno\\Desktop\\MinhaApi\\MinhaApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\aluno\\Desktop\\BOOTCAMP_DTT\\dia06\\MinhaApi\\MinhaApi.csproj": {
+    "C:\\Users\\aluno\\Desktop\\MinhaApi\\MinhaApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aluno\\Desktop\\BOOTCAMP_DTT\\dia06\\MinhaApi\\MinhaApi.csproj",
+        "projectUniqueName": "C:\\Users\\aluno\\Desktop\\MinhaApi\\MinhaApi.csproj",
         "projectName": "MinhaApi",
-        "projectPath": "C:\\Users\\aluno\\Desktop\\BOOTCAMP_DTT\\dia06\\MinhaApi\\MinhaApi.csproj",
+        "projectPath": "C:\\Users\\aluno\\Desktop\\MinhaApi\\MinhaApi.csproj",
         "packagesPath": "C:\\Users\\aluno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aluno\\Desktop\\BOOTCAMP_DTT\\dia06\\MinhaApi\\obj\\",
+        "outputPath": "C:\\Users\\aluno\\Desktop\\MinhaApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\aluno\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -45,6 +45,10 @@
           "targetAlias": "net10.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[10.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
               "version": "[10.0.2, )"
             },
