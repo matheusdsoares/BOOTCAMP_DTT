@@ -9,7 +9,7 @@ Bem-vindo ao repositório do meu aprendizado no **Bootcamp DTT**. Aqui documento
 ## 🛠️ Tecnologias e Ferramentas 
 * **Linguagem:** C#
 * **Framework:** .NET (Console & Web API)
-* **Ferramentas:** Git, GitHub, VS Code/Visual Studio, Dockers, Dbeaver
+* **Ferramentas:** Git, GitHub, VS Code/Visual Studio, Dockers, Dbeaver, Insomnia
 
 ---
 
