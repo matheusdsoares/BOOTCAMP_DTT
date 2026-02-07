@@ -100,5 +100,18 @@ namespace MinhaApi.Controllers
             return NoContent(); // Retorna 204 (Sucesso, sem conteúdo no corpo)
         }
 
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var lote = await _db.LotesMinerio.FindAsync(id);
+            if (lote is null)
+                return NotFound("Lote não encontrado.");
+
+            _db.LotesMinerio.Remove(lote);
+            await _db.SaveChangesAsync();
+
+            return NoContent();
+        }
+
     }
 }
