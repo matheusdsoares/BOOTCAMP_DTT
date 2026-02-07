@@ -1,0 +1,29 @@
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: pg_estudos
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-minhaapi_db}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata_estudos:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-minhaapi_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    # Labels opcionais úteis para Rancher (facilitam identificação/agrupamento)
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.name: "PostgreSQL - Estudos"
+
+volumes:
+  pgdata_estudos:
+    driver: local
