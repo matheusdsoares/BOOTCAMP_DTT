@@ -22,9 +22,10 @@ Acompanhe o que foi desenvolvido em cada etapa:
 | **Dia 02** | POO Básica | Criação da classe `Visitante` e lógica de CRUD. |
 | **Dia 03** | Refatoração | Melhorias na lógica e organização de código. |
 | **Dia 04** | Estruturação | Gestão de pastas para múltiplos casos de uso. |
-| **Dia 05** | APIs | Desenvolvimento da primeira `MinhaApi`. |
+| **Dia 05** | APIs | Desenvolvimento da primeira `MinhaApi`. | 
 | **Dia 06** | Dockers e Dbeaver | Desenvolvimento da API, com aplicação no Dorckers e Dbeaver |
-| **Dia 07** | Dockers e Dbeaver | Continuação do projeto do dia 06, por isso não teve nova pasta com dia 07
+| **Dia 07** | Dockers e Dbeaver | Continuação do projeto do dia 06, por isso não teve nova pasta com dia 07 |
+| **Dia 08** | Tests e Proteção | Utilização do XUnit para testar todo o código do CRUD Api. |
 
 ## 💡 Destaques do Projeto
 
