@@ -26,6 +26,8 @@ Acompanhe o que foi desenvolvido em cada etapa:
 | **Dia 06** | Dockers e Dbeaver | Desenvolvimento da API, com aplicação no Dorckers e Dbeaver |
 | **Dia 07** | Dockers e Dbeaver | Continuação do projeto do dia 06, por isso não teve nova pasta com dia 07 |
 | **Dia 08** | Tests e Proteção | Utilização do XUnit para testar todo o código do CRUD Api. |
+| **Dia 09** | Tests e Proteção | Não foi criado uma nova pasta porque continuou os testes unitarios na pasta com o dia 08 |
+
 
 ## 💡 Destaques do Projeto
 
