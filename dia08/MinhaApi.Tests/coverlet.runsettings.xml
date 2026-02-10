@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector underline="XPlat Code Coverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <Exclude>[Microsoft.*]*,[System.*]*,[*]MinhaApi.Migrations.*</Exclude>
+          <ExcludeByAttribute>ExcludeFromCodeCoverage</ExcludeByAttribute>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>
