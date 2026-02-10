@@ -1,0 +1,86 @@
+🧪 Testes Unitários no .NET
+📌 1. O que são Testes Unitários?
+Testes unitários são pequenos testes automatizados que verificam se uma unidade de código (geralmente um método ou função) funciona corretamente de forma isolada.
+✔️ “Unidade” = o menor pedaço testável da aplicação (ex: um método).
+✔️ “Isolado” = sem depender de banco, API externa, arquivos, etc.
+✔️ Objetivo = garantir que o código faça exatamente o que foi planejado.
+________________________________________
+📌 2. Para que servem os Testes Unitários?
+🎯 2.1 Garantir que o código funciona
+Ajudam a validar a lógica da aplicação logo no começo do processo.
+🔄 2.2 Evitar regressões
+Quando você altera algo no código, os testes confirmam que nada que já estava funcionando quebrou.
+🛠️ 2.3 Facilitar refatorações
+Com testes, você pode melhorar o código com mais confiança.
+📚 2.4 Servir como documentação viva
+O próprio teste explica “como usar” o método, deixando claro quais comportamentos são esperados.
+⚙️ 2.5 Automatizar validações
+Ao rodar o comando dotnet test, você confirma automaticamente que tudo está funcionando.
+________________________________________
+📌 3. Por que os Testes Unitários são importantes?
+Sem testes unitários, você depende de:
+•	Testes manuais repetitivos
+•	Risco de bugs silenciosos
+•	Dificuldade de manter o código no longo prazo
+•	Medo de mexer no código por receio de quebrar algo
+Com testes unitários:
+•	O software fica mais robusto
+•	A manutenção fica mais segura
+•	O time ganha agilidade
+•	O código se torna mais modular, já que métodos muito grandes são difíceis de testar
+________________________________________
+🧱 4. Estrutura de Testes Unitários no .NET
+O .NET trabalha muito bem com frameworks de testes como:
+•	xUnit (mais moderno, muito usado)
+•	NUnit
+•	MSTest
+O mais recomendado hoje é xUnit, especialmente em projetos novos.
+
+📦 Criando um projeto de testes:
+
+dotnet new xunit -n MinhaApi.Tests
+
+🔗 Referenciando o projeto principal:
+
+Rodar na pasta Projeto de estudos:
+dotnet add MinhaApi.Tests reference MinhaApi	
+
+Por que o projeto de testes precisa referenciar o projeto principal?
+Em termos práticos e do compilador, é por três motivos principais:
+1.	Acesso ao código que será testado (resolução de símbolos)
+o	Seus testes chamam classes/métodos definidos no projeto principal. Sem a referência, o compilador do projeto de testes não conhece esses tipos (erros como “The type or namespace name ‘X’ could not be found”).
+o	A referência cria uma dependência de compilação: o projeto de testes “enxerga” os namespaces, classes e métodos públicos (e os internal se você liberar via InternalsVisibleTo, veja abaixo).
+2.	Build e versionamento consistentes
+o	Com uma ProjectReference, o dotnet test sabe buildar na ordem certa: primeiro o projeto principal, depois os testes que dependem dele, garantindo que os testes sempre rodem contra o código mais recente.
+o	Evita o risco de testar contra um DLL antigo (o que pode acontecer se você adiciona um arquivo .dll estático ao invés de uma ProjectReference).
+3.	Descoberta e execução pelo test runner
+o	O runner (xUnit/NUnit/MSTest via dotnet test/IDE) carrega o assembly de testes e, por tabela, precisa carregar o assembly do SUT (System Under Test) referenciado para instanciar classes, executar métodos e avaliar asserts.
+
+Colocar no MinhaApi.Tests.csproj
+
+<ItemGroup>
+    <PackageReference Include="xunit" Version="2.7.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.7">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+  </ItemGroup>
+
+Criar a classe de testes unitários.
+
+Rodar dotnet test.
+
+Para ver a porcentagem da cobertura de testes unitários, primeiro instale o directory:
+
+dotnet test --collect "XPlat Code Coverage" --results-directory TestResults
+
+Depois na pasta do coverage, rode esse comando:
+
+type Summary.txt
+
+type TestResults\coverage-report\Summary.txt
+
+start index.html   - Para inicar com um HTML PORÉM PRECISA ESTAR DENTRO DA PASTA COVERAGE-REPORT
+
+dotnet test /p:CollectCoverage=true "Para criar automaticamente o TestResults"
+cria: coverage-report\Summary.txt
