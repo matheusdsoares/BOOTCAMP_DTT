@@ -20,76 +20,110 @@ namespace MinhaApi.Tests.Controllers
             return new AppDbContext(options);
         }
 
-        [Fact]
-        public async Task FluxoCompleto_LoteMinerio_DeveCobrirTodosOsCenarios()
+        // --- TESTES DE CRIAÇÃO (CREATE) ---
+
+        [Theory]
+        [InlineData("", "Mina 1", "Patio 1", 60, 10, 500, 1)] // CodigoLote vazio
+        [InlineData("L01", "", "Patio 1", 60, 10, 500, 1)]   // MinaOrigem vazia
+        [InlineData("L01", "Mina 1", "", 60, 10, 500, 1)]   // Localizacao vazia
+        [InlineData("L01", "Mina 1", "P1", -1, 10, 500, 1)]  // TeorFe < 0
+        [InlineData("L01", "Mina 1", "P1", 101, 10, 500, 1)] // TeorFe > 100
+        [InlineData("L01", "Mina 1", "P1", 60, -1, 500, 1)]  // Umidade < 0
+        [InlineData("L01", "Mina 1", "P1", 60, 101, 500, 1)] // Umidade > 100
+        [InlineData("L01", "Mina 1", "P1", 60, 10, 0, 1)]    // Toneladas <= 0
+        [InlineData("L01", "Mina 1", "P1", 60, 10, 500, 5)]  // Status inválido
+        public async Task Create_DeveRetornarBadRequest_QuandoDadosInvalidos(
+            string cod, string mina, string loc, double teor, double umid, double ton, int status)
         {
-            // --- ARRANGE ---
+            using var db = GetDbContext();
+            var controller = new LotesMinerioController(db);
+            var dto = new CreateLoteMinerioDto { 
+                CodigoLote = cod, MinaOrigem = mina, LocalizacaoAtual = loc, 
+                TeorFe = teor, Umidade = umid, Toneladas = ton, Status = status 
+            };
+
+            var result = await controller.Create(dto);
+
+            Assert.IsType<BadRequestObjectResult>(result);
+        }
+
+        [Fact]
+        public async Task Create_DeveRetornarConflict_QuandoCodigoJaExiste()
+        {
+            using var db = GetDbContext();
+            var controller = new LotesMinerioController(db);
+            var dto = new CreateLoteMinerioDto { CodigoLote = "DUPLICADO", MinaOrigem = "M1", LocalizacaoAtual = "P1", Toneladas = 10 };
+            
+            await controller.Create(dto); // Primeiro insert
+            var result = await controller.Create(dto); // Segundo insert (conflito)
+
+            Assert.IsType<ConflictObjectResult>(result);
+        }
+
+        // --- TESTES DE ATUALIZAÇÃO (UPDATE) ---
+
+        [Theory]
+        [InlineData("", "Mina Alterada")] // CodigoLote vazio no Update
+        [InlineData("L01", "")]           // MinaOrigem vazia no Update
+        public async Task Update_DeveRetornarBadRequest_QuandoCamposObrigatoriosVazios(string cod, string mina)
+        {
+            using var db = GetDbContext();
+            var controller = new LotesMinerioController(db);
+            
+            // Criar um lote para tentar atualizar
+            var lote = new LoteMinerio { CodigoLote = "ORIGINAL", MinaOrigem = "ORIGINAL", LocalizacaoAtual = "P1" };
+            db.LotesMinerio.Add(lote);
+            await db.SaveChangesAsync();
+
+            var dtoUpdate = new UpdateLoteMinerioDto { CodigoLote = cod, MinaOrigem = mina };
+            var result = await controller.Update(lote.Id, dtoUpdate);
+
+            Assert.IsType<BadRequestObjectResult>(result);
+        }
+
+        // --- TESTES DE NOT FOUND ---
+
+        [Fact]
+        public async Task GetById_Update_Delete_DevemRetornarNotFound_QuandoIdNaoExiste()
+        {
+            using var db = GetDbContext();
+            var controller = new LotesMinerioController(db);
+            int idInexistente = 999;
+
+            var resultGet = await controller.GetById(idInexistente);
+            var resultUpdate = await controller.Update(idInexistente, new UpdateLoteMinerioDto { CodigoLote = "A", MinaOrigem = "B" });
+            var resultDelete = await controller.Delete(idInexistente);
+
+            Assert.IsType<NotFoundResult>(resultGet);
+            Assert.IsType<NotFoundObjectResult>(resultUpdate);
+            Assert.IsType<NotFoundObjectResult>(resultDelete);
+        }
+
+        // --- CAMINHO FELIZ (FLUXO COMPLETO) ---
+
+        [Fact]
+        public async Task FluxoCompleto_Sucesso_DeveCobrirRestante()
+        {
             using var db = GetDbContext();
             var controller = new LotesMinerioController(db);
 
-            // 1. DTO Válido para criação
-            var dtoValido = new CreateLoteMinerioDto 
-            { 
-                CodigoLote = "LOTE-001", 
-                MinaOrigem = "Mina Norte", 
-                LocalizacaoAtual = "Patio 1",
-                TeorFe = 65,
-                Umidade = 8,
-                Toneladas = 1000,
-                Status = 1
-            };
+            // 1. Create
+            var dto = new CreateLoteMinerioDto { CodigoLote = "SUCESSO", MinaOrigem = "M1", LocalizacaoAtual = "P1", Toneladas = 10, DataProducao = DateTime.Now };
+            var resCreate = await controller.Create(dto);
+            var created = Assert.IsType<CreatedAtActionResult>(resCreate);
+            var lote = (LoteMinerio)created.Value;
 
-            // 2. DTOs Inválidos para testar os BadRequests (Validation coverage)
-            var dtoSemCodigo = new CreateLoteMinerioDto { CodigoLote = "" };
-            var dtoTeorInvalido = new CreateLoteMinerioDto { CodigoLote = "L-02", MinaOrigem = "M1", LocalizacaoAtual = "P1", TeorFe = 150 }; // > 100
+            // 2. GetById
+            var resGet = await controller.GetById(lote.Id);
+            Assert.IsType<OkObjectResult>(resGet);
 
-            // --- ACT & ASSERT (Testando cada ramificação do Controller) ---
+            // 3. Update
+            var resUpd = await controller.Update(lote.Id, new UpdateLoteMinerioDto { CodigoLote = "ALTERADO", MinaOrigem = "M1" });
+            Assert.IsType<NoContentResult>(resUpd);
 
-            // A. Testando BadRequests do Create
-            var resultBad1 = await controller.Create(dtoSemCodigo);
-            Assert.IsType<BadRequestObjectResult>(resultBad1);
-
-            var resultBad2 = await controller.Create(dtoTeorInvalido);
-            Assert.IsType<BadRequestObjectResult>(resultBad2);
-
-            // B. Testando Caminho Feliz (Create)
-            var resultCreate = await controller.Create(dtoValido);
-            var createdResult = Assert.IsType<CreatedAtActionResult>(resultCreate);
-            var loteCriado = Assert.IsType<LoteMinerio>(createdResult.Value);
-            int idGerado = loteCriado.Id;
-
-            // C. Testando Conflito (Código duplicado)
-            var resultConflict = await controller.Create(dtoValido);
-            Assert.IsType<ConflictObjectResult>(resultConflict);
-
-            // D. Testando GetById (Sucesso)
-            var resultGet = await controller.GetById(idGerado);
-            Assert.IsType<OkObjectResult>(resultGet);
-
-            // E. Testando GetById (NotFound)
-            var resultGet404 = await controller.GetById(9999);
-            Assert.IsType<NotFoundResult>(resultGet404);
-
-            // F. Testando Update (Sucesso)
-            var dtoUpdate = new UpdateLoteMinerioDto 
-            { 
-                CodigoLote = "LOTE-001-MOD", 
-                MinaOrigem = "Mina Sul" 
-            };
-            var resultUpdate = await controller.Update(idGerado, dtoUpdate);
-            Assert.IsType<NoContentResult>(resultUpdate);
-
-            // G. Testando Update (NotFound)
-            var resultUpdate404 = await controller.Update(9999, dtoUpdate);
-            Assert.IsType<NotFoundObjectResult>(resultUpdate404);
-
-            // H. Testando Delete (Sucesso)
-            var resultDelete = await controller.Delete(idGerado);
-            Assert.IsType<NoContentResult>(resultDelete);
-
-            // I. Testando Delete (NotFound)
-            var resultDelete404 = await controller.Delete(idGerado); // Já foi deletado
-            Assert.IsType<NotFoundObjectResult>(resultDelete404);
+            // 4. Delete
+            var resDel = await controller.Delete(lote.Id);
+            Assert.IsType<NoContentResult>(resDel);
         }
     }
 }

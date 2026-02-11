@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<coverage line-rate="0.2711" branch-rate="0.11380000000000001" version="1.9" timestamp="1770753407" lines-covered="144" lines-valid="531" branches-covered="28" branches-valid="246">
+<coverage line-rate="0.2711" branch-rate="0.11380000000000001" version="1.9" timestamp="1770779098" lines-covered="144" lines-valid="531" branches-covered="28" branches-valid="246">
   <sources>
-    <source>C:\Users\aluno\Desktop\BOOTCAMP_DTT\dia06\MinhaApi\</source>
+    <source>C:\Users\Mathe\OneDrive\Área de Trabalho\BOOTCAMP_DTT\dia06\MinhaApi\</source>
   </sources>
   <packages>
     <package name="MinhaApi" line-rate="0.2711" branch-rate="0.11380000000000001" complexity="308">
       <classes>
-        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;FB54F9D3CA8F0702F226F7FF75003A6CCD048BF5325108BB438AB225FB5AC22D8__XmlComment" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="1" complexity="10">
+        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F7E8FDD2507550D6161B5EE577A5F6396F7351035474B1D8F2152B308677933C3__XmlComment" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="1" complexity="10">
           <methods>
             <method name="get_Summary" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
@@ -53,7 +53,7 @@
                 <line number="55" hits="0" branch="False" />
               </lines>
             </method>
-            <method name=".ctor" signature="(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Collections.Generic.List`1&lt;System.String&gt;,System.Collections.Generic.List`1&lt;Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;FB54F9D3CA8F0702F226F7FF75003A6CCD048BF5325108BB438AB225FB5AC22D8__XmlParameterComment&gt;,System.Collections.Generic.List`1&lt;Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;FB54F9D3CA8F0702F226F7FF75003A6CCD048BF5325108BB438AB225FB5AC22D8__XmlResponseComment&gt;)" line-rate="0" branch-rate="1" complexity="1">
+            <method name=".ctor" signature="(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Collections.Generic.List`1&lt;System.String&gt;,System.Collections.Generic.List`1&lt;Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F7E8FDD2507550D6161B5EE577A5F6396F7351035474B1D8F2152B308677933C3__XmlParameterComment&gt;,System.Collections.Generic.List`1&lt;Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F7E8FDD2507550D6161B5EE577A5F6396F7351035474B1D8F2152B308677933C3__XmlResponseComment&gt;)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
                 <line number="46" hits="0" branch="False" />
               </lines>
@@ -72,7 +72,7 @@
             <line number="46" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;FB54F9D3CA8F0702F226F7FF75003A6CCD048BF5325108BB438AB225FB5AC22D8__XmlParameterComment" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="1" complexity="1">
+        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F7E8FDD2507550D6161B5EE577A5F6396F7351035474B1D8F2152B308677933C3__XmlParameterComment" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="1" complexity="1">
           <methods>
             <method name="get_Name" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
@@ -84,7 +84,7 @@
             <line number="58" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;FB54F9D3CA8F0702F226F7FF75003A6CCD048BF5325108BB438AB225FB5AC22D8__XmlResponseComment" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="1" complexity="1">
+        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F7E8FDD2507550D6161B5EE577A5F6396F7351035474B1D8F2152B308677933C3__XmlResponseComment" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="1" complexity="1">
           <methods>
             <method name="get_Code" signature="()" line-rate="0" branch-rate="1" complexity="1">
               <lines>
@@ -96,7 +96,7 @@
             <line number="61" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;FB54F9D3CA8F0702F226F7FF75003A6CCD048BF5325108BB438AB225FB5AC22D8__XmlCommentCache" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="0" complexity="3">
+        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F7E8FDD2507550D6161B5EE577A5F6396F7351035474B1D8F2152B308677933C3__XmlCommentCache" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="0" complexity="3">
           <methods>
             <method name="get_Cache" signature="()" line-rate="0" branch-rate="0" complexity="2">
               <lines>
@@ -128,7 +128,7 @@
             <line number="75" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;FB54F9D3CA8F0702F226F7FF75003A6CCD048BF5325108BB438AB225FB5AC22D8__DocumentationCommentIdHelper" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="0" complexity="68">
+        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F7E8FDD2507550D6161B5EE577A5F6396F7351035474B1D8F2152B308677933C3__DocumentationCommentIdHelper" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="0" complexity="68">
           <methods>
             <method name="CreateDocumentationId" signature="(System.Type)" line-rate="0" branch-rate="0" complexity="2">
               <lines>
@@ -728,7 +728,7 @@
             <line number="338" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;FB54F9D3CA8F0702F226F7FF75003A6CCD048BF5325108BB438AB225FB5AC22D8__XmlCommentOperationTransformer" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="0" complexity="100">
+        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F7E8FDD2507550D6161B5EE577A5F6396F7351035474B1D8F2152B308677933C3__XmlCommentOperationTransformer" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="0" complexity="100">
           <methods>
             <method name="TransformAsync" signature="(Microsoft.OpenApi.OpenApiOperation,Microsoft.AspNetCore.OpenApi.OpenApiOperationTransformerContext,System.Threading.CancellationToken)" line-rate="0" branch-rate="0" complexity="94">
               <lines>
@@ -1348,7 +1348,7 @@
             <line number="504" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;FB54F9D3CA8F0702F226F7FF75003A6CCD048BF5325108BB438AB225FB5AC22D8__XmlCommentSchemaTransformer" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="0" complexity="34">
+        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F7E8FDD2507550D6161B5EE577A5F6396F7351035474B1D8F2152B308677933C3__XmlCommentSchemaTransformer" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="0" complexity="34">
           <methods>
             <method name="TransformAsync" signature="(Microsoft.OpenApi.OpenApiSchema,Microsoft.AspNetCore.OpenApi.OpenApiSchemaTransformerContext,System.Threading.CancellationToken)" line-rate="0" branch-rate="0" complexity="34">
               <lines>
@@ -1544,7 +1544,7 @@
             <line number="562" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;FB54F9D3CA8F0702F226F7FF75003A6CCD048BF5325108BB438AB225FB5AC22D8__JsonNodeExtensions" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="0" complexity="2">
+        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F7E8FDD2507550D6161B5EE577A5F6396F7351035474B1D8F2152B308677933C3__JsonNodeExtensions" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="0" complexity="2">
           <methods>
             <method name="Parse" signature="(System.String)" line-rate="0" branch-rate="0" complexity="2">
               <lines>
@@ -1590,7 +1590,7 @@
             <line number="591" hits="0" branch="False" />
           </lines>
         </class>
-        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;FB54F9D3CA8F0702F226F7FF75003A6CCD048BF5325108BB438AB225FB5AC22D8__GeneratedServiceCollectionExtensions" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0.5714" branch-rate="1" complexity="1">
+        <class name="Microsoft.AspNetCore.OpenApi.Generated.&lt;OpenApiXmlCommentSupport_generated&gt;F7E8FDD2507550D6161B5EE577A5F6396F7351035474B1D8F2152B308677933C3__GeneratedServiceCollectionExtensions" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0.5714" branch-rate="1" complexity="1">
           <methods>
             <method name="AddOpenApi" signature="(Microsoft.Extensions.DependencyInjection.IServiceCollection)" line-rate="0.5714" branch-rate="1" complexity="1">
               <lines>
@@ -1614,7 +1614,7 @@
             <line number="605" hits="1" branch="False" />
           </lines>
         </class>
-        <class name="System.Runtime.CompilerServices.&lt;OpenApiXmlCommentSupport_generated&gt;FB54F9D3CA8F0702F226F7FF75003A6CCD048BF5325108BB438AB225FB5AC22D8__InterceptsLocationAttribute" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="1" complexity="1">
+        <class name="System.Runtime.CompilerServices.&lt;OpenApiXmlCommentSupport_generated&gt;F7E8FDD2507550D6161B5EE577A5F6396F7351035474B1D8F2152B308677933C3__InterceptsLocationAttribute" filename="obj\Debug\net10.0\Microsoft.AspNetCore.OpenApi.SourceGenerators\Microsoft.AspNetCore.OpenApi.SourceGenerators.XmlCommentGenerator\OpenApiXmlCommentSupport.generated.cs" line-rate="0" branch-rate="1" complexity="1">
           <methods>
             <method name=".ctor" signature="(System.Int32,System.String)" line-rate="0" branch-rate="1" complexity="1">
               <lines>
