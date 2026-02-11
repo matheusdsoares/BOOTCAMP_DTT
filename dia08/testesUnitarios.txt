@@ -73,6 +73,12 @@ Rodar dotnet test.
 Para ver a porcentagem da cobertura de testes unitários, primeiro instale o directory:
 
 dotnet test --collect "XPlat Code Coverage" --results-directory TestResults
+dotnet add package coverlet.collector
+dotnet test --collect:"XPlat Code Coverage"
+dotnet tool install -g dotnet-reportgenerator-globaltool
+reportgenerator "-reports:TestResults\*\coverage.cobertura.xml" "-targetdir:TestResults\coverage-report" "-reporttypes:TextSummary;Html"
+type TestResults\coverage-report\Summary.txt
+
 
 Depois na pasta do coverage, rode esse comando:
 
