@@ -28,6 +28,7 @@ Acompanhe o que foi desenvolvido em cada etapa:
 | **Dia 08** | Tests e Proteção | Utilização do XUnit para testar todo o código do CRUD Api. |
 | **Dia 09** | Tests e Proteção | Não foi criado uma nova pasta porque continuou os testes unitarios na pasta com o dia 08 |
 | **Dia 10** | Classes Fila | Foi criada uma conexão com o Redis, para quando o POST fosse utilizado, aparecesse o processamento no Redis. Não foi criado uma nova pasta, pois foi utilizada a MinhaApi do dia 06|
+| **Dia 11** | Minha Api Melhoras |Desenvolvido novos metodos para melhoria da MinhaApi e criado nova pasta dia11|
 
 
 ## 💡 Destaques do Projeto
