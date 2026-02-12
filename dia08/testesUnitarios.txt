@@ -79,6 +79,17 @@ dotnet tool install -g dotnet-reportgenerator-globaltool
 reportgenerator "-reports:TestResults\*\coverage.cobertura.xml" "-targetdir:TestResults\coverage-report" "-reporttypes:TextSummary;Html"
 type TestResults\coverage-report\Summary.txt
 
+-- Conexão com o Redis Dentro da pasta MinhaApi--
+dotnet add package StackExchange.Redis
+Coloca a conexão do Redis no docker-compose.yml (pedir ao gemini)
+docker compose up -d
+Depois colocar a conexão no appsetings.json para conexão com o redis (pedis IA)
+Criar classes lista e colocar em uma pasta nova "Queue"
+Incluir a saída do Redis no Controller.
+Incluir chamada do Redis no program
+docker exec -it redis_estudos redis-cli - verifica a URL, basta ir em Conectin database e trocar apenas os números e depois colocar para add que aparacem os POST no Redis.
+Mexemos bastante no program.css e Controllers
+
 
 Depois na pasta do coverage, rode esse comando:
 

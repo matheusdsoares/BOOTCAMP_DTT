@@ -9,7 +9,7 @@ Bem-vindo ao repositório do meu aprendizado no **Bootcamp DTT**. Aqui documento
 ## 🛠️ Tecnologias e Ferramentas 
 * **Linguagem:** C#
 * **Framework:** .NET (Console & Web API)
-* **Ferramentas:** Git, GitHub, VS Code/Visual Studio, Dockers, Dbeaver, Insomnia
+* **Ferramentas:** Git, GitHub, VS Code/Visual Studio, Dockers, Dbeaver, Insomnia, Redis
 
 ---
 
@@ -27,21 +27,52 @@ Acompanhe o que foi desenvolvido em cada etapa:
 | **Dia 07** | Dockers e Dbeaver | Continuação do projeto do dia 06, por isso não teve nova pasta com dia 07 |
 | **Dia 08** | Tests e Proteção | Utilização do XUnit para testar todo o código do CRUD Api. |
 | **Dia 09** | Tests e Proteção | Não foi criado uma nova pasta porque continuou os testes unitarios na pasta com o dia 08 |
+| **Dia 10** | Classes Fila | Foi criada uma conexão com o Redis, para quando o POST fosse utilizado, aparecesse o processamento no Redis. Não foi criado uma nova pasta, pois foi utilizada a MinhaApi do dia 06|
 
 
 ## 💡 Destaques do Projeto
 
-### Conteúdo da classe `Visitante`
-Focada em **Modelagem de Dados**, esta classe gerencia:
-- Atributos como `Nome`, `Id`, e horários.
-- Métodos para formatação de data/hora no padrão `HH:mm`.
-- Geração de tabelas de informações para o cliente.
+### Conteúdo do Controller `LotesMinerio`
+Responsável pela exposição dos endpoints REST da aplicação:
+- Criação, consulta, atualização e remoção de lotes de minério.
+- Validações de negócio (campos obrigatórios, limites de teor, umidade, etc.).
+- Persistência das informações no PostgreSQL via Entity Framework.
+- Publicação de eventos no Redis sempre que um novo lote é criado.
+Ao realizar um POST, além de salvar no banco, a API envia uma mensagem para processamento assíncrono.
 
-### Conteúdo da classe `Program`
-O "coração" das aplicações console, onde implementei:
-- Menus interativos com `while` e `switch`.
-- Persistência em listas para busca e filtragem.
-- Tratamento de erros com `try-catch` para uma melhor experiência do usuário.
+### Integração com Redis (Mensageria)
+
+Implementei um Producer responsável por enviar eventos para um Redis Stream, permitindo comunicação desacoplada entre serviços.
+
+Cada novo lote gera uma mensagem contendo:
+
+- Id do lote
+- Código
+- Teor de ferro
+- Umidade
+- Data de produção
+- Ação executada (Processamento)
+
+Essa abordagem permite que workers ou outros sistemas consumam os dados de forma independente da API.
+
+### Classe LoteQueueProducer
+Camada responsável por:
+
+- Conectar ao Redis usando ConnectionMultiplexer.
+- Serializar a mensagem em JSON.
+- Publicar o evento no stream configurado.
+- Garantir um modelo de arquitetura assíncrona utilizado em ambientes distribuídos.
+
+### Configuração via Program.cs
+Aplicação estruturada com Injeção de Dependência, registrando:
+
+- DbContext com PostgreSQL.
+- Conexão com Redis.
+- Opções de fila usando IOptions.
+- Producer de mensageria.
+
+Esse padrão facilita testes, manutenção e escalabilidade.
+
 
 ---
 
