@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MinhaApi.Data;
 using MinhaApi.Models;
 using MinhaApi.Dtos;
+using MinhaApi.Queue;
 
 namespace MinhaApi.Controllers
 {
@@ -11,8 +12,13 @@ namespace MinhaApi.Controllers
     public class LotesMinerioController : ControllerBase
     {
         private readonly AppDbContext _db;
+        private readonly ILoteQueueProducer _queue;
 
-        public LotesMinerioController(AppDbContext db) => _db = db;
+        public LotesMinerioController(AppDbContext db, ILoteQueueProducer queue)
+        {
+            _db = db;
+            _queue = queue;
+        }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateLoteMinerioDto input)
@@ -52,6 +58,20 @@ namespace MinhaApi.Controllers
 
             _db.LotesMinerio.Add(lote);
             await _db.SaveChangesAsync();
+            var msg = new ProcessarLoteMessage(
+            lote.Id,
+            lote.CodigoLote,
+            lote.TeorFe,
+            lote.Umidade,
+            lote.DataProducao,
+            "Processamento"   // 👈 esse é o campo Ação
+            );
+
+            await _queue.EnfileirarAsync(msg);
+
+            Console.WriteLine("PASSEI DO ENQUEUE");
+
+
 
             return CreatedAtAction(nameof(GetById), new { id = lote.Id }, lote);
         }
@@ -96,6 +116,8 @@ namespace MinhaApi.Controllers
 
             // 5. Salva as mudanças
             await _db.SaveChangesAsync();
+            Console.WriteLine("CHEGUEI ANTES DO ENQUEUE");
+
 
             return NoContent(); // Retorna 204 (Sucesso, sem conteúdo no corpo)
         }

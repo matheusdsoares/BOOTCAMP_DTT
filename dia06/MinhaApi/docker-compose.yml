@@ -23,7 +23,20 @@ services:
     labels:
       io.rancher.container.pull_image: always
       io.rancher.container.name: "PostgreSQL - Estudos"
+  
+  redis:
+      image: redis:7-alpine
+      container_name: redis_estudos
+      restart: unless-stopped
+      ports:
+        - "6379:6379"
+      command: ["redis-server", "--appendonly", "yes"]
+      volumes:
+        - redisdata_estudos:/data
 
 volumes:
   pgdata_estudos:
     driver: local
+  redisdata_estudos:
+    driver: local
+  
