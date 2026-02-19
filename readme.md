@@ -98,9 +98,9 @@ Esse padrão facilita testes, manutenção e escalabilidade.
       POSTGRES_DB: ${POSTGRES_DB:-api_db}
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
-      - "${POSTGRES_PORT:-5431}:5432"
+       "${POSTGRES_PORT:-5431}:5432"
     volumes:
-      - pg_desafio:/var/lib/postgresql/data
+       pg_desafio:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-minhaapi_db}"]
       interval: 5s
