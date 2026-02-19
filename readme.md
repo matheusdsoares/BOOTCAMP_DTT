@@ -123,7 +123,7 @@ docker-compose up -d
     Rodar a API:
     dotnet run
 
-##  Exemplo de descrição do CRUD no README:
+##  Exemplo de descrição do CRUD:
 
 
 ## 🛠️ API Endpoints - Equipamentos
@@ -137,7 +137,55 @@ docker-compose up -d
 | DELETE | `/api/equipamentos/{id}` | Remove um ativo do sistema |
 
 
+## Export do Insonmia
 
+### Post Desafio (testando erros)
+curl --request POST \
+  --url http://localhost:5087/api/equipamentos \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/12.3.1' \
+  --data '{
+  "codigo": "",
+  "tipo": "caminhao",
+  "modelo": "",
+  "horimetro": -10,
+  "statusOperacional": "Operacional",
+  "dataAquisicao": "2026-02-19T00:00:00Z"
+}'
+
+### Put Desafio 
+curl --request PUT \
+  --url http://localhost:5087/api/equipamentos/1 \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/12.3.1' \
+  --data '{
+	
+	"codigo": "CAT-793F-002",
+	"tipo": "Caminhao",
+	"modelo": "Caterpillar 793F",
+	"horimetro": 1250.50,
+	"statusOperacional": "Operacional",
+	"dataAquisicao": "2023-05-20T00:00:00",
+	"localizacaoAtual": "Mina Carajás N4E"
+}'
+
+### Get Desafio
+http://localhost:5087/api/equipamentos
+
+### Post Desafio
+curl --request POST \
+  --url http://localhost:5087/api/equipamentos \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/12.3.1' \
+  --data '{
+  "codigo": "CAT-793F",
+  "tipo": "Caminhao",
+  "modelo": "Caterpillar 793F",
+  "horimetro": 1500.50,
+  "statusOperacional": "Operacional",
+  "dataAquisicao": "2024-05-20T00:00:00Z",
+  "localizacaoAtual": "Mina de Ferro - Setor Norte"
+}'
 
 
 
