@@ -77,6 +77,70 @@ Esse padrão facilita testes, manutenção e escalabilidade.
 
 ---
 
+### 🚀 Como Rodar o Projeto Desafio
+### Pré-requisitos
+* [.NET 9 SDK](https://dotnet.microsoft.com/download)
+* [Docker Desktop](https://www.docker.com/products/docker-desktop)
+
+### Passo a Passo
+
+1. **Subir o Banco de Dados:**
+   No diretório raiz do projeto (onde está o arquivo `docker-compose.yml`), execute:
+
+   services:
+  postgres:
+    image: postgres:16
+    container_name: pg_desafio
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-api_db}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${POSTGRES_PORT:-5431}:5432"
+    volumes:
+      - pg_desafio:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-minhaapi_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.name: "PostgreSQL - Estudos"
+
+volumes:
+  pg_desafio:
+    driver: local
+  
+   
+docker-compose up -d
+
+ ## Configurar o Banco (Script SQL):
+    Abra o DBeaver, conecte-se ao Postgres (localhost:5431) e execute o script SQL de criação da tabela equipamentos fornecido na pasta /Database.
+    Rodar a API:
+    dotnet run
+
+##  Exemplo de descrição do CRUD no README:
+
+
+## 🛠️ API Endpoints - Equipamentos
+
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| GET | `/api/equipamentos` | Lista todos os ativos |
+| GET | `/api/equipamentos/{id}` | Busca um ativo por ID |
+| POST | `/api/equipamentos` | Cadastra um novo ativo |
+| PUT | `/api/equipamentos/{id}` | Atualiza dados (Valida horímetro) |
+| DELETE | `/api/equipamentos/{id}` | Remove um ativo do sistema |
+
+
+
+
+
+
 ## ⌨️ Comandos Git/Terminal Utilizados
 No dia a dia, utilizei os seguintes comandos para versionamento:
 
@@ -95,6 +159,7 @@ git commit -m "Explicação da alteração"
 git push origin [branch]
 git pull origin [branch]
 git branch
+ 
 
 
 
