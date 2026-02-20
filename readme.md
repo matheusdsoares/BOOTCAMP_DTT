@@ -86,7 +86,7 @@ Esse padrão facilita testes, manutenção e escalabilidade.
 
 1. **Subir o Banco de Dados:**
    No diretório raiz do projeto (onde está o arquivo `docker-compose.yml`), execute:
-
+```yml
    services:
   postgres:
     image: postgres:16
@@ -114,10 +114,11 @@ Esse padrão facilita testes, manutenção e escalabilidade.
 volumes:
   pg_desafio:
     driver: local
-  
-   
+  ````
+ ````
+ Bash
 docker-compose up -d
-
+````
  ## Configurar o Banco (Script SQL):
     Abra o DBeaver, conecte-se ao Postgres (localhost:5431) e execute o script SQL de criação da tabela equipamentos fornecido na pasta /Database.
     Rodar a API:
@@ -140,6 +141,8 @@ docker-compose up -d
 ## Export do Insonmia
 
 ### Post Desafio (testando erros)
+
+````
 curl --request POST \
   --url http://localhost:5087/api/equipamentos \
   --header 'Content-Type: application/json' \
@@ -152,8 +155,9 @@ curl --request POST \
   "statusOperacional": "Operacional",
   "dataAquisicao": "2026-02-19T00:00:00Z"
 }'
-
+````
 ### Put Desafio 
+````
 curl --request PUT \
   --url http://localhost:5087/api/equipamentos/1 \
   --header 'Content-Type: application/json' \
@@ -168,11 +172,13 @@ curl --request PUT \
 	"dataAquisicao": "2023-05-20T00:00:00",
 	"localizacaoAtual": "Mina Carajás N4E"
 }'
-
+````
 ### Get Desafio
+````
 http://localhost:5087/api/equipamentos
-
+````
 ### Post Desafio
+````
 curl --request POST \
   --url http://localhost:5087/api/equipamentos \
   --header 'Content-Type: application/json' \
@@ -186,7 +192,7 @@ curl --request POST \
   "dataAquisicao": "2024-05-20T00:00:00Z",
   "localizacaoAtual": "Mina de Ferro - Setor Norte"
 }'
-
+````
 
 
 ## ⌨️ Comandos Git/Terminal Utilizados
