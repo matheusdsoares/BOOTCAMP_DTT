@@ -1,0 +1,139 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MinhaApi.Data;
+using MinhaApi.Models;
+using MinhaApi.Dtos;
+using MinhaApi.Queue;
+
+namespace MinhaApi.Controllers
+{
+    [ApiController]
+    [Route("api/LotesMinerio")]
+    public class LotesMinerioController : ControllerBase
+    {
+        private readonly AppDbContext _db;
+        private readonly ILoteQueueProducer _queue;
+
+        public LotesMinerioController(AppDbContext db, ILoteQueueProducer queue)
+        {
+            _db = db;
+            _queue = queue;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateLoteMinerioDto input)
+        {
+            if (string.IsNullOrWhiteSpace(input.CodigoLote))
+                return BadRequest("CodigoLote é obrigatório.");
+            if (string.IsNullOrWhiteSpace(input.MinaOrigem))
+                return BadRequest("MinaOrigem é obrigatória.");
+            if (string.IsNullOrWhiteSpace(input.LocalizacaoAtual))
+                return BadRequest("LocalizacaoAtual é obrigatória.");
+            if (input.TeorFe is < 0 or > 100)
+                return BadRequest("TeorFe deve estar entre 0 e 100 (%).");
+            if (input.Umidade is < 0 or > 100)
+                return BadRequest("Umidade deve estar entre 0 e 100 (%).");
+            if (input.Toneladas <= 0)
+                return BadRequest("Toneladas deve ser > 0.");
+            if (input.Status is < 0 or > 2)
+                return BadRequest("Status inválido (use 0, 1 ou 2).");
+
+            var exists = await _db.LotesMinerio.AnyAsync(x => x.CodigoLote == input.CodigoLote);
+            if (exists)
+                return Conflict($"Já existe um lote com CodigoLote '{input.CodigoLote}'.");
+
+            var lote = new LoteMinerio
+            {
+                CodigoLote = input.CodigoLote,
+                MinaOrigem = input.MinaOrigem,
+                TeorFe = input.TeorFe,
+                Umidade = input.Umidade,
+                SiO2 = input.SiO2,
+                P = input.P,
+                Toneladas = input.Toneladas,
+                DataProducao = input.DataProducao ?? DateTime.UtcNow,
+                Status = (StatusLote)input.Status,
+                LocalizacaoAtual = input.LocalizacaoAtual
+            };
+
+            _db.LotesMinerio.Add(lote);
+            await _db.SaveChangesAsync();
+            var msg = new ProcessarLoteMessage(
+            lote.Id,
+            lote.CodigoLote,
+            lote.TeorFe,
+            lote.Umidade,
+            lote.DataProducao,
+            "Processamento"   // 👈 esse é o campo Ação
+            );
+
+            await _queue.EnfileirarAsync(msg);
+
+            Console.WriteLine("PASSEI DO ENQUEUE");
+
+
+
+            return CreatedAtAction(nameof(GetById), new { id = lote.Id }, lote);
+        }
+
+        [HttpGet("{id:int}")]
+
+        public async Task<IActionResult> GetById(int id)
+        {
+            var l = await _db.LotesMinerio.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            if (l is null) return NotFound();
+
+            var dto = new LoteMinerioResponseDto(
+                l.Id, l.CodigoLote, l.MinaOrigem, l.TeorFe, l.Umidade, l.SiO2, l.P,
+                l.Toneladas, l.DataProducao, l.Status, l.LocalizacaoAtual
+            );
+
+            return Ok(dto);
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateLoteMinerioDto input)
+        {
+            // 1. Busca o lote existente no banco
+            var lote = await _db.LotesMinerio.FirstOrDefaultAsync(x => x.Id == id);
+
+            // 2. Se não encontrar, retorna 404
+            if (lote is null) return NotFound($"Lote com ID {id} não encontrado.");
+
+            // 3. Validações básicas (seguindo a lógica do seu Create)
+            if (string.IsNullOrWhiteSpace(input.CodigoLote))
+                return BadRequest("CodigoLote é obrigatório.");
+            if (string.IsNullOrWhiteSpace(input.MinaOrigem))
+                return BadRequest("MinaOrigem é obrigatória.");
+
+            // 4. Atualiza as propriedades do objeto que veio do banco com os dados do DTO
+            lote.CodigoLote = input.CodigoLote;
+            lote.MinaOrigem = input.MinaOrigem;
+            lote.TeorFe = input.TeorFe;
+            lote.Umidade = input.Umidade;
+            lote.SiO2 = input.SiO2;
+            lote.P = input.P;
+
+            // 5. Salva as mudanças
+            await _db.SaveChangesAsync();
+            Console.WriteLine("CHEGUEI ANTES DO ENQUEUE");
+
+
+            return NoContent(); // Retorna 204 (Sucesso, sem conteúdo no corpo)
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var lote = await _db.LotesMinerio.FindAsync(id);
+            if (lote is null)
+                return NotFound("Lote não encontrado.");
+
+            _db.LotesMinerio.Remove(lote);
+            await _db.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+    }
+}
